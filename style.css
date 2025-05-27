@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;800&family=VT323&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Poppins";
+  background: #999;
+}
+
+.container {
+  max-width: 1340px;
+  margin: 10px auto 0;
+  background: white;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  border-radius: 15px;
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  /* gap: 40px; */
+  justify-content: space-between;
+  padding: 20px 0 30px;
+}
+.nav-bar h2 {
+  padding-left: 20px;
+}
+.nav-bar > div > p {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 12px 0 12px 30px;
+  /* width: 100%; */
+}
+.nav-bar > div > p:hover,
+.nav-bar > div > p:focus {
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+  border-radius: 8px;
+}
+/* .nav-bar > div > p > svg:active {
+  background: lightblue;
+} */
+
+.main-container {
+  background: #999;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  height: 90px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 6px 5px 12px -4px rgba(0, 0, 0, 0.55);
+}
+.search-container {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+}
+.search-container label {
+  position: relative;
+  top: 3px;
+  left: 50px;
+}
+
+.search-container input {
+  flex: 1;
+  border-radius: 34px;
+  border: none;
+  outline: none;
+  height: 30px;
+  background-color: #c8d0da;
+  padding: 0 45px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.search-container input:focus {
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(15, 140, 182, 0.5);
+}
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  width: 15%;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  height: 100%;
+}
+.main-content {
+  margin: 20px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+}
+aside {
+  background: #3887;
+  height: 100%;
+}
