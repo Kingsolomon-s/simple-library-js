@@ -110,7 +110,7 @@ function displayBook(library) {
         labelContainer.classList.add("label-container");
 
         const readLabel = document.createElement("span");
-        readLabel.textContent = "Read:";
+        readLabel.textContent = "Completed:";
 
         const label = document.createElement("label");
         label.classList.add("switch");
