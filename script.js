@@ -34,6 +34,7 @@ form.addEventListener("submit", (event) => {
 });
 
 const myLibrary = [];
+const aside = document.querySelector("aside");
 
 function Books(title, author, pages, read) {
   this.id = crypto.randomUUID();
@@ -62,14 +63,27 @@ function displayBook(library) {
     card.classList.add("card");
     card.dataset.id = String(book.id);
 
+    //Add random background gradient
+    card.style.backgroundImage = getRandomGradient();
+    card.style.color = "#fff";
+
+    card.addEventListener("click", () => {
+      aside.innerHTML = "";
+      const preview = createPreview(book);
+      aside.appendChild(preview);
+    });
+
     const remove = document.createElement("button");
     remove.classList.add("remove");
-    remove.innerHTML = `Delete <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-    <path d="M5.5 5.5a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5zM8 5.5a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5zM10.5 5.5a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5z"/>
-    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4H2.5a1 1 0 0 1 0-2h3.086a1 1 0 0 1 .707.293l.707.707h2.414l.707-.707A1 1 0 0 1 10.414 1H13.5a1 1 0 0 1 1 1v1zm-3.5 1v9a1 1 0 0 0 1 1H5a1 1 0 0 0-1-1V4h8z"/>
-  </svg>`;
+
+    const deleteBtn = document.createElement("img");
+    deleteBtn.src = "./images/trash.svg";
+    deleteBtn.classList.add("delete-btn");
+
+    remove.appendChild(deleteBtn);
 
     remove.addEventListener("click", () => {
+      event.stopPropagation();
       if (card.dataset.id === String(book.id)) {
         bookSection.removeChild(cardContainer);
 
@@ -132,14 +146,59 @@ function displayBook(library) {
   });
 }
 
-// const listItems = document.querySelectorAll("li");
+function getRandomGradient() {
+  const angle = Math.floor(Math.random() * 360);
+  const color1 = `hsl(${Math.floor(Math.random() * 360)}, 70%, 70%)`;
+  const color2 = `hsl(${Math.floor(Math.random() * 360)}, 70%, 70%)`;
+  return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+}
 
-// listItems.forEach((item) => {
-//   item.addEventListener("click", () => {
-//     // Remove "clicked" class from all list items
-//     listItems.forEach((li) => li.classList.remove("clicked"));
+function createPreview(book) {
+  const preview = document.createElement("div");
+  preview.classList.add("preview");
 
-//     // Add "clicked" class to the clicked item
-//     item.classList.add("clicked");
-//   });
-// });
+  const previewCover = document.createElement("div");
+  previewCover.classList.add("preview-cover");
+  previewCover.style.backgroundImage = getRandomGradient();
+  previewCover.textContent = book.title[0];
+  previewCover.style.display = "flex";
+  previewCover.style.alignItems = "center";
+  previewCover.style.justifyContent = "center";
+  previewCover.style.color = "white";
+  previewCover.style.fontSize = "2rem";
+
+  const previewTitle = document.createElement("p");
+  previewTitle.textContent = book.title;
+
+  const previewAuthor = document.createElement("p");
+  previewAuthor.textContent = book.author;
+  previewAuthor.classList.add("preview-author");
+
+  const previewRating = document.createElement("div");
+  previewRating.classList.add("preview-rating");
+  previewRating.innerHTML = `
+      <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+      <span class="rating-number">4.8</span>
+    `;
+
+  const previewStats = document.createElement("div");
+  previewStats.classList.add("preview-stats");
+  previewStats.innerHTML = `
+      <div><strong>${book.pages}</strong><br>Pages</div>
+      <div><strong>643</strong><br>Ratings</div>
+      <div><strong>110</strong><br>Reviews</div>
+    `;
+
+  const readNowBtn = document.createElement("button");
+  readNowBtn.classList.add("read-now-btn");
+  readNowBtn.textContent = "Read Now";
+
+  preview.appendChild(previewCover);
+  preview.appendChild(previewTitle);
+  preview.appendChild(previewAuthor);
+  preview.appendChild(previewRating);
+  preview.appendChild(previewStats);
+  preview.appendChild(readNowBtn);
+
+  return preview;
+}
